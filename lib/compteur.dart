@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Compteur extends StatelessWidget {
-  const Compteur({super.key});
+class Compteur extends StatefulWidget {
+  Compteur({super.key});
+
+  @override
+  State<Compteur> createState() => _CompteurState();
+}
+
+class _CompteurState extends State<Compteur> {
+  int scoreTeamA = 0;
+
+  int scoreTeamB = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +41,10 @@ class Compteur extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Divider(endIndent: 10, thickness: 3),
                         Container(
                           child: Text(
-                            "0",
+                            scoreTeamA.toString(),
                             style: TextStyle(
                               fontSize: 150,
                               fontWeight: FontWeight.bold,
@@ -48,6 +58,9 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
+                              setState(() {
+                                scoreTeamA += 1;
+                              });
                               print("1 point team A");
                             },
                             child: Text("Add 1 point"),
@@ -61,6 +74,9 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
+                              setState(() {
+                                scoreTeamA += 2;
+                              });
                               print("2 point team A");
                             },
                             child: Text("Add 2 point"),
@@ -74,6 +90,9 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
+                              setState(() {
+                                scoreTeamA += 3;
+                              });
                               print("3 point team A");
                             },
                             child: Text("Add 3 point"),
@@ -83,6 +102,7 @@ class Compteur extends StatelessWidget {
                     ),
                   ),
                 ),
+                VerticalDivider(),
                 Expanded(
                   child: Container(
                     height: 520,
@@ -99,9 +119,10 @@ class Compteur extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Divider(indent: 10, thickness: 3),
                         Container(
                           child: Text(
-                            "0",
+                            scoreTeamB.toString(),
                             style: TextStyle(
                               fontSize: 150,
                               fontWeight: FontWeight.bold,
@@ -115,6 +136,9 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
+                              setState(() {
+                                scoreTeamB += 1;
+                              });
                               print("1 point team B");
                             },
                             child: Text("Add 1 point"),
@@ -128,9 +152,12 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              print("3 point team B");
+                              setState(() {
+                                scoreTeamB += 2;
+                              });
+                              print("2 point team B");
                             },
-                            child: Text("Add 3 point"),
+                            child: Text("Add 2 point"),
                           ),
                         ),
                         SizedBox(height: 15),
@@ -141,6 +168,9 @@ class Compteur extends StatelessWidget {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
+                              setState(() {
+                                scoreTeamB += 3;
+                              });
                               print("3 point team B");
                             },
                             child: Text("Add 3 point"),
@@ -162,6 +192,10 @@ class Compteur extends StatelessWidget {
                   minimumSize: Size(200, 70),
                 ),
                 onPressed: () {
+                  setState(() {
+                    scoreTeamA = 0;
+                    scoreTeamB = 0;
+                  });
                   print("reset score");
                 },
                 child: Text("Reset"),
