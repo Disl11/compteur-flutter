@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
+import 'package:compteur/profils/profil.dart';
 
 class TeamB extends StatefulWidget {
   const TeamB({super.key});
@@ -48,9 +49,21 @@ class _TeamBState extends State<TeamB> {
                       itemBuilder: (Context, index) {
                         final player = playersTeamB[index];
                         return Card(
-                          child: ListTile(
-                            title: Text("Nom : ${player.lastName}"),
-                            subtitle: Text("Prenom : ${player.firstName}"),
+                          child: GestureDetector(
+                            child: ListTile(
+                              onTap: () {
+                                final playerId = player.id;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Profils(playerId: player),
+                                  ),
+                                );
+                              },
+                              title: Text("Nom : ${player.lastName}"),
+                              subtitle: Text("Prenom : ${player.firstName}"),
+                            ),
                           ),
                         );
                       },
