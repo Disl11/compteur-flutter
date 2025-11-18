@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 
 class TeamB extends StatefulWidget {
-  TeamB({super.key});
+  const TeamB({super.key});
 
   @override
-  State<TeamB> createState() => _TeamAState();
+  State<TeamB> createState() => _TeamBState();
 }
 
-class _TeamAState extends State<TeamB> {
+class _TeamBState extends State<TeamB> {
   List playersTeamB = [];
   bool isLoading = true;
 
@@ -23,6 +23,7 @@ class _TeamAState extends State<TeamB> {
     final players = await PlayersRepo.getPlayers();
     setState(() {
       playersTeamB = players.skip(10).take(10).toList();
+      isLoading = false;
     });
   }
 
@@ -30,7 +31,7 @@ class _TeamAState extends State<TeamB> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Players Team A")),
+        title: Center(child: Text("Players Team B")),
         backgroundColor: Colors.orangeAccent,
       ),
       body: isLoading
@@ -45,14 +46,11 @@ class _TeamAState extends State<TeamB> {
                     child: ListView.builder(
                       itemCount: playersTeamB.length,
                       itemBuilder: (Context, index) {
+                        final player = playersTeamB[index];
                         return Card(
                           child: ListTile(
-                            title: Text(
-                              "Nom : ${playersTeamB[index]["lastName"]}",
-                            ),
-                            subtitle: Text(
-                              "Prenom : ${playersTeamB[index]["firstName"]}",
-                            ),
+                            title: Text("Nom : ${player.lastName}"),
+                            subtitle: Text("Prenom : ${player.firstName}"),
                           ),
                         );
                       },

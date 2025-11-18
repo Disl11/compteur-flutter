@@ -1,3 +1,4 @@
+import 'package:compteur/profils/profil.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 
@@ -23,6 +24,7 @@ class _TeamAState extends State<TeamA> {
     final players = await PlayersRepo.getPlayers();
     setState(() {
       playersTeamA = players.take(10).toList();
+      isLoading = false;
     });
   }
 
@@ -45,13 +47,23 @@ class _TeamAState extends State<TeamA> {
                     child: ListView.builder(
                       itemCount: playersTeamA.length,
                       itemBuilder: (Context, index) {
+                        final player = playersTeamA[index];
                         return Card(
-                          child: ListTile(
-                            title: Text(
-                              "Nom : ${playersTeamA[index]["lastName"]}",
-                            ),
-                            subtitle: Text(
-                              "Prenom : ${playersTeamA[index]["firstName"]}",
+                          child: GestureDetector(
+                            child: ListTile(
+                              onTap: () {
+                                final playerId = player.id;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Profils(playerId: player),
+                                  ),
+                                );
+                                print("click profil ${player.id}");
+                              },
+                              title: Text("Nom : ${player.lastName}"),
+                              subtitle: Text("Prenom : ${player.firstName}"),
                             ),
                           ),
                         );
