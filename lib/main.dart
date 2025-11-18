@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/TeamA': (BuildContext context) => TeamA(),
-        '/TeamB': (BuildContext context) => const TeamB(),
+        '/TeamB': (BuildContext context) => TeamB(),
       },
 
       title: 'Compteur',
