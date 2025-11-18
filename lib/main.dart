@@ -1,4 +1,6 @@
 import 'package:compteur/compteur.dart';
+import 'package:compteur/pageTeams/teamA.dart';
+import 'package:compteur/pageTeams/teamB.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Compteur', home: Compteur());
+    return MaterialApp(
+      routes: {
+        '/TeamA': (BuildContext context) => TeamA(),
+        '/TeamB': (BuildContext context) => const TeamB(),
+      },
+
+      title: 'Compteur',
+      home: Compteur(),
+    );
   }
 }

@@ -9,7 +9,6 @@ class Compteur extends StatefulWidget {
 
 class _CompteurState extends State<Compteur> {
   int scoreTeamA = 0;
-
   int scoreTeamB = 0;
 
   @override
@@ -19,7 +18,34 @@ class _CompteurState extends State<Compteur> {
         title: Center(child: Text("Mon compteur")),
         backgroundColor: Colors.orangeAccent,
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.amberAccent,
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Center(
+                  child: Text("Menu", style: TextStyle(fontSize: 35)),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Team A"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/TeamA');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Team B"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/TeamB');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Container(
@@ -32,15 +58,22 @@ class _CompteurState extends State<Compteur> {
                     child: Column(
                       children: [
                         SizedBox(height: 10),
-                        Container(
-                          child: Text(
-                            "Team A",
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/TeamA');
+                            print("click Team A");
+                          },
+                          child: Container(
+                            child: Text(
+                              "Team A",
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
+
                         Divider(endIndent: 10, thickness: 3),
                         Container(
                           child: Text(
@@ -110,15 +143,22 @@ class _CompteurState extends State<Compteur> {
                     child: Column(
                       children: [
                         SizedBox(height: 10),
-                        Container(
-                          child: Text(
-                            "Team B",
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/TeamB');
+                            print("Click Team B");
+                          },
+                          child: Container(
+                            child: Text(
+                              "Team B",
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
+
                         Divider(indent: 10, thickness: 3),
                         Container(
                           child: Text(
