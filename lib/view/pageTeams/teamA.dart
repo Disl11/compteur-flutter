@@ -1,4 +1,4 @@
-import 'package:compteur/profils/profil.dart';
+import 'package:compteur/view/profils/profil.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 
@@ -73,6 +73,14 @@ class _TeamAState extends State<TeamA> {
                 ),
               ],
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.orangeAccent,
+        tooltip: 'Retour',
+        child: Icon(Icons.arrow_back),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
-import 'package:compteur/profils/profil.dart';
+import 'package:compteur/view/profils/profil.dart';
 
 class TeamB extends StatefulWidget {
   const TeamB({super.key});

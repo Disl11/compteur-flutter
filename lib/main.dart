@@ -1,7 +1,7 @@
-import 'package:compteur/compteur.dart';
-import 'package:compteur/pageTeams/teamA.dart';
-import 'package:compteur/pageTeams/teamB.dart';
-import 'package:compteur/profils/profil.dart';
+import 'package:compteur/view/compteur/compteur.dart';
+import 'package:compteur/view/pageTeams/teamA.dart';
+import 'package:compteur/view/pageTeams/teamB.dart';
+import 'package:compteur/view/profils/profil.dart';
 import 'package:flutter/material.dart';
 
 void main() {
