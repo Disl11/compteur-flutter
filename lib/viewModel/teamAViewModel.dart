@@ -5,12 +5,11 @@ class TeamAViewModel extends ChangeNotifier {
   List playersTeamA = [];
   bool isLoading = true;
 
-  Future loadUser() async {
+  Future loadUserA() async {
     //signaler en cour de chargemetn
     isLoading = true;
     // avertir l'ui avec notifyListners qu'il doit reconstruire car l'état a changé
     notifyListeners();
-
     // appel de l'api
     final players = await PlayersRepo.getPlayers();
     //condition

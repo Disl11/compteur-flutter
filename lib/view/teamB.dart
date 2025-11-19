@@ -1,6 +1,8 @@
+import 'package:compteur/viewModel/teamBViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 import 'package:compteur/view/profil.dart';
+import 'package:provider/provider.dart';
 
 class TeamB extends StatefulWidget {
   const TeamB({super.key});
@@ -10,32 +12,16 @@ class TeamB extends StatefulWidget {
 }
 
 class _TeamBState extends State<TeamB> {
-  List playersTeamB = [];
-  bool isLoading = true;
-
-  @override
-  //initialiser le widget
-  void initState() {
-    super.initState();
-    loadUser();
-  }
-
-  void loadUser() async {
-    final players = await PlayersRepo.getPlayers();
-    setState(() {
-      playersTeamB = players.skip(10).take(10).toList();
-      isLoading = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<TeamBViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text("Players Team B")),
         backgroundColor: Colors.orangeAccent,
       ),
-      body: isLoading
+      body: viewModel.isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -45,9 +31,9 @@ class _TeamBState extends State<TeamB> {
                     height: 672,
                     width: 250,
                     child: ListView.builder(
-                      itemCount: playersTeamB.length,
+                      itemCount: viewModel.playersTeamB.length,
                       itemBuilder: (Context, index) {
-                        final player = playersTeamB[index];
+                        final player = viewModel.playersTeamB[index];
                         return Card(
                           child: GestureDetector(
                             child: ListTile(

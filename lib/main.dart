@@ -2,7 +2,9 @@ import 'package:compteur/view/compteur.dart';
 import 'package:compteur/view/teamA.dart';
 import 'package:compteur/view/teamB.dart';
 import 'package:compteur/view/profil.dart';
+import 'package:compteur/viewModel/compteurViewModel.dart';
 import 'package:compteur/viewModel/teamAViewModel.dart';
+import 'package:compteur/viewModel/teamBViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,9 +20,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => TeamAViewModel()..loadUser(),
+          create: (_) => TeamAViewModel()..loadUserA(),
           lazy: true,
         ),
+        ChangeNotifierProvider(
+          create: (_) => TeamBViewModel()..loadUserB(),
+          lazy: true,
+        ),
+        ChangeNotifierProvider(create: (_) => CompteurViewModel()),
       ],
       child: MaterialApp(
         routes: {
