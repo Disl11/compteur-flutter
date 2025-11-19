@@ -41,14 +41,6 @@ class Profils extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        backgroundColor: Colors.orangeAccent,
-        tooltip: 'Retour',
-        child: Icon(Icons.arrow_back),
-      ),
     );
   }
 }

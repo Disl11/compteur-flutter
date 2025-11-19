@@ -1,16 +1,16 @@
-import 'package:compteur/view/profils/profil.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
+import 'package:compteur/view/profil.dart';
 
-class TeamA extends StatefulWidget {
-  TeamA({super.key});
+class TeamB extends StatefulWidget {
+  const TeamB({super.key});
 
   @override
-  State<TeamA> createState() => _TeamAState();
+  State<TeamB> createState() => _TeamBState();
 }
 
-class _TeamAState extends State<TeamA> {
-  List playersTeamA = [];
+class _TeamBState extends State<TeamB> {
+  List playersTeamB = [];
   bool isLoading = true;
 
   @override
@@ -23,7 +23,7 @@ class _TeamAState extends State<TeamA> {
   void loadUser() async {
     final players = await PlayersRepo.getPlayers();
     setState(() {
-      playersTeamA = players.take(10).toList();
+      playersTeamB = players.skip(10).take(10).toList();
       isLoading = false;
     });
   }
@@ -32,7 +32,7 @@ class _TeamAState extends State<TeamA> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Players Team A")),
+        title: Center(child: Text("Players Team B")),
         backgroundColor: Colors.orangeAccent,
       ),
       body: isLoading
@@ -45,9 +45,9 @@ class _TeamAState extends State<TeamA> {
                     height: 672,
                     width: 250,
                     child: ListView.builder(
-                      itemCount: playersTeamA.length,
+                      itemCount: playersTeamB.length,
                       itemBuilder: (Context, index) {
-                        final player = playersTeamA[index];
+                        final player = playersTeamB[index];
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
@@ -60,7 +60,6 @@ class _TeamAState extends State<TeamA> {
                                         Profils(playerId: player),
                                   ),
                                 );
-                                print("click profil ${player.id}");
                               },
                               title: Text("Nom : ${player.lastName}"),
                               subtitle: Text("Prenom : ${player.firstName}"),
@@ -73,14 +72,6 @@ class _TeamAState extends State<TeamA> {
                 ),
               ],
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        backgroundColor: Colors.orangeAccent,
-        tooltip: 'Retour',
-        child: Icon(Icons.arrow_back),
-      ),
     );
   }
 }

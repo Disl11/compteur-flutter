@@ -1,8 +1,10 @@
-import 'package:compteur/view/compteur/compteur.dart';
-import 'package:compteur/view/pageTeams/teamA.dart';
-import 'package:compteur/view/pageTeams/teamB.dart';
-import 'package:compteur/view/profils/profil.dart';
+import 'package:compteur/view/compteur.dart';
+import 'package:compteur/view/teamA.dart';
+import 'package:compteur/view/teamB.dart';
+import 'package:compteur/view/profil.dart';
+import 'package:compteur/viewModel/teamAViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +15,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/TeamA': (BuildContext context) => TeamA(),
-        '/TeamB': (BuildContext context) => TeamB(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TeamAViewModel()..loadUser(),
+          lazy: true,
+        ),
+      ],
+      child: MaterialApp(
+        routes: {
+          '/TeamA': (BuildContext context) => TeamA(),
+          '/TeamB': (BuildContext context) => TeamB(),
+        },
 
-      title: 'Compteur',
-      home: Compteur(),
+        title: 'Compteur',
+        home: Compteur(),
+      ),
     );
   }
 }
