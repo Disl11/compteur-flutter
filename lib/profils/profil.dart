@@ -22,6 +22,7 @@ class Profils extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image.network(playerId.image, height: 100, width: 100),
                 Text(
                   "Nom : ${playerId.lastName}",
                   style: TextStyle(fontSize: 25),
@@ -34,6 +35,7 @@ class Profils extends StatelessWidget {
                   "Age : ${playerId.age} ans ",
                   style: TextStyle(fontSize: 15),
                 ),
+                Text("Taille : ${playerId.height}"),
               ],
             ),
           ),
