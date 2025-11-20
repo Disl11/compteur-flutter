@@ -1,41 +1,26 @@
+import 'package:compteur/viewModel/teamViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:compteur/api/api.dart';
-import 'package:compteur/profils/profil.dart';
+import 'package:provider/provider.dart';
+import 'package:compteur/view/profil.dart';
 
-class TeamB extends StatefulWidget {
-  const TeamB({super.key});
+class Mercato extends StatefulWidget {
+  const Mercato({super.key});
 
   @override
-  State<TeamB> createState() => _TeamBState();
+  State<Mercato> createState() => _MercatoState();
 }
 
-class _TeamBState extends State<TeamB> {
-  List playersTeamB = [];
-  bool isLoading = true;
-
-  @override
-  //initialiser le widget
-  void initState() {
-    super.initState();
-    loadUser();
-  }
-
-  void loadUser() async {
-    final players = await PlayersRepo.getPlayers();
-    setState(() {
-      playersTeamB = players.skip(10).take(10).toList();
-      isLoading = false;
-    });
-  }
-
+class _MercatoState extends State<Mercato> {
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<TeamViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Players Team B")),
+        title: Center(child: Text("Mercato")),
         backgroundColor: Colors.orangeAccent,
       ),
-      body: isLoading
+      body: viewModel.isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -45,12 +30,27 @@ class _TeamBState extends State<TeamB> {
                     height: 672,
                     width: 250,
                     child: ListView.builder(
-                      itemCount: playersTeamB.length,
+                      itemCount: viewModel.mercato.length,
                       itemBuilder: (Context, index) {
-                        final player = playersTeamB[index];
+                        final player = viewModel.mercato[index];
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
+                              trailing: PopupMenuButton(
+                                onSelected: (value) {
+                                  viewModel.transferPlayer(index, value);
+                                },
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: 'A',
+                                    child: Text("Transfer Equipe A"),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'B',
+                                    child: Text("Transfer Equipe B"),
+                                  ),
+                                ],
+                              ),
                               onTap: () {
                                 final playerId = player.id;
                                 Navigator.push(
@@ -60,6 +60,7 @@ class _TeamBState extends State<TeamB> {
                                         Profils(playerId: player),
                                   ),
                                 );
+                                print("click profil ${player.id}");
                               },
                               title: Text("Nom : ${player.lastName}"),
                               subtitle: Text("Prenom : ${player.firstName}"),

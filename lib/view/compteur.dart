@@ -1,4 +1,7 @@
+import 'package:compteur/viewModel/compteurViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:compteur/view/navigation.dart';
 
 class Compteur extends StatefulWidget {
   Compteur({super.key});
@@ -8,11 +11,9 @@ class Compteur extends StatefulWidget {
 }
 
 class _CompteurState extends State<Compteur> {
-  int scoreTeamA = 0;
-  int scoreTeamB = 0;
-
   @override
   Widget build(BuildContext context) {
+    final modelView = Provider.of<CompteurViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text("Mon compteur")),
@@ -42,6 +43,13 @@ class _CompteurState extends State<Compteur> {
                   Navigator.pushNamed(context, '/TeamB');
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text("Mercato"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/Mercato');
+                },
+              ),
             ],
           ),
         ),
@@ -49,12 +57,12 @@ class _CompteurState extends State<Compteur> {
       body: Column(
         children: [
           Container(
-            height: 520,
+            height: 510,
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-                    height: 520,
+                    height: 510,
                     child: Column(
                       children: [
                         SizedBox(height: 10),
@@ -77,7 +85,7 @@ class _CompteurState extends State<Compteur> {
                         Divider(endIndent: 10, thickness: 3),
                         Container(
                           child: Text(
-                            scoreTeamA.toString(),
+                            modelView.scoreTeamA.toString(),
                             style: TextStyle(
                               fontSize: 150,
                               fontWeight: FontWeight.bold,
@@ -91,9 +99,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamA += 1;
-                              });
+                              modelView.addPointTeamA(1);
                               print("1 point team A");
                             },
                             child: Text("Add 1 point"),
@@ -107,9 +113,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamA += 2;
-                              });
+                              modelView.addPointTeamA(2);
                               print("2 point team A");
                             },
                             child: Text("Add 2 point"),
@@ -123,9 +127,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamA += 3;
-                              });
+                              modelView.addPointTeamA(3);
                               print("3 point team A");
                             },
                             child: Text("Add 3 point"),
@@ -158,11 +160,10 @@ class _CompteurState extends State<Compteur> {
                             ),
                           ),
                         ),
-
                         Divider(indent: 10, thickness: 3),
                         Container(
                           child: Text(
-                            scoreTeamB.toString(),
+                            modelView.scoreTeamB.toString(),
                             style: TextStyle(
                               fontSize: 150,
                               fontWeight: FontWeight.bold,
@@ -176,9 +177,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamB += 1;
-                              });
+                              modelView.addPointTeamB(1);
                               print("1 point team B");
                             },
                             child: Text("Add 1 point"),
@@ -192,9 +191,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamB += 2;
-                              });
+                              modelView.addPointTeamB(2);
                               print("2 point team B");
                             },
                             child: Text("Add 2 point"),
@@ -208,9 +205,7 @@ class _CompteurState extends State<Compteur> {
                               minimumSize: Size(150, 60),
                             ),
                             onPressed: () {
-                              setState(() {
-                                scoreTeamB += 3;
-                              });
+                              modelView.addPointTeamB(3);
                               print("3 point team B");
                             },
                             child: Text("Add 3 point"),
@@ -224,7 +219,7 @@ class _CompteurState extends State<Compteur> {
             ),
           ),
           Container(
-            height: 150,
+            height: 100,
             child: Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -232,10 +227,7 @@ class _CompteurState extends State<Compteur> {
                   minimumSize: Size(200, 70),
                 ),
                 onPressed: () {
-                  setState(() {
-                    scoreTeamA = 0;
-                    scoreTeamB = 0;
-                  });
+                  modelView.resetPoint();
                   print("reset score");
                 },
                 child: Text("Reset"),
@@ -244,6 +236,7 @@ class _CompteurState extends State<Compteur> {
           ),
         ],
       ),
+      bottomNavigationBar: NavigationBarDubas(),
     );
   }
 }
