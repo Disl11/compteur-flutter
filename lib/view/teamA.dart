@@ -1,5 +1,5 @@
 import 'package:compteur/view/profil.dart';
-import 'package:compteur/viewModel/teamAViewModel.dart';
+import 'package:compteur/viewModel/teamViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class TeamA extends StatefulWidget {
 class _TeamAState extends State<TeamA> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<TeamAViewModel>(context);
+    final viewModel = Provider.of<TeamViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +39,7 @@ class _TeamAState extends State<TeamA> {
                             child: ListTile(
                               trailing: IconButton(
                                 onPressed: () {
-                                  viewModel.remouvePlayerA(index);
+                                  viewModel.remouvePlayer(index);
                                   print("delete player ${player.id}");
                                 },
                                 icon: Icon(Icons.close),

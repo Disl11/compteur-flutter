@@ -1,23 +1,30 @@
 import 'package:compteur/api/api.dart';
 import 'package:flutter/material.dart';
+import 'package:compteur/models/players.dart';
 
-class TeamBViewModel extends ChangeNotifier {
-  List playersTeamB = [];
+class TeamViewModel extends ChangeNotifier {
+  List<Players> playersTeamA = [];
+  List<Players> mercato = [];
   bool isLoading = true;
 
-  Future loadUserB() async {
+  Future loadUserA() async {
     //signaler en cour de chargemetn
     isLoading = true;
     // avertir l'ui avec notifyListners qu'il doit reconstruire car l'état a changé
     notifyListeners();
-
     // appel de l'api
     final players = await PlayersRepo.getPlayers();
     //condition
-    playersTeamB = players.skip(10).take(10).toList();
+    playersTeamA = players.take(10).toList();
     //indiquer chargement terminer
     isLoading = false;
     // avertir l'ui qu'elle peu affiché list des joueur
+    notifyListeners();
+  }
+
+  void remouvePlayer(int index) {
+    final player = playersTeamA.removeAt(index);
+    mercato.add(player);
     notifyListeners();
   }
 }

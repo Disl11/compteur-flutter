@@ -1,4 +1,4 @@
-import 'package:compteur/viewModel/teamBViewModel.dart';
+import 'package:compteur/viewModel/teamViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:compteur/api/api.dart';
 import 'package:compteur/view/profil.dart';
@@ -14,7 +14,7 @@ class TeamB extends StatefulWidget {
 class _TeamBState extends State<TeamB> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<TeamBViewModel>(context);
+    final viewModel = Provider.of<TeamViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,12 +31,18 @@ class _TeamBState extends State<TeamB> {
                     height: 672,
                     width: 250,
                     child: ListView.builder(
-                      itemCount: viewModel.playersTeamB.length,
+                      itemCount: viewModel.playersTeamA.length,
                       itemBuilder: (Context, index) {
-                        final player = viewModel.playersTeamB[index];
+                        final player = viewModel.playersTeamA[index];
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
+                              trailing: IconButton(
+                                onPressed: () {
+                                  viewModel.remouvePlayer(index);
+                                },
+                                icon: Icon(Icons.close),
+                              ),
                               onTap: () {
                                 final playerId = player.id;
                                 Navigator.push(

@@ -1,4 +1,4 @@
-import 'package:compteur/viewModel/teamAViewModel.dart';
+import 'package:compteur/viewModel/teamViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:compteur/view/profil.dart';
@@ -13,7 +13,7 @@ class Mercato extends StatefulWidget {
 class _MercatoState extends State<Mercato> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<TeamAViewModel>(context);
+    final viewModel = Provider.of<TeamViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
