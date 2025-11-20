@@ -37,6 +37,13 @@ class _TeamAState extends State<TeamA> {
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
+                              trailing: IconButton(
+                                onPressed: () {
+                                  viewModel.remouvePlayerA(index);
+                                  print("delete player ${player.id}");
+                                },
+                                icon: Icon(Icons.close),
+                              ),
                               onTap: () {
                                 final playerId = player.id;
                                 Navigator.push(

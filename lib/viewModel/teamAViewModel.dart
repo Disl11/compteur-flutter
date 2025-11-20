@@ -19,4 +19,9 @@ class TeamAViewModel extends ChangeNotifier {
     // avertir l'ui qu'elle peu affiché list des joueur
     notifyListeners();
   }
+
+  void remouvePlayerA(int index) {
+    playersTeamA.removeAt(index);
+    notifyListeners();
+  }
 }
