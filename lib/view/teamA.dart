@@ -39,7 +39,7 @@ class _TeamAState extends State<TeamA> {
                             child: ListTile(
                               trailing: IconButton(
                                 onPressed: () {
-                                  viewModel.remouvePlayer(index);
+                                  viewModel.remouvePlayer(index, 'A');
                                   print("delete player ${player.id}");
                                 },
                                 icon: Icon(Icons.close),

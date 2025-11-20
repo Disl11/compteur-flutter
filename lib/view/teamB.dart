@@ -31,15 +31,15 @@ class _TeamBState extends State<TeamB> {
                     height: 672,
                     width: 250,
                     child: ListView.builder(
-                      itemCount: viewModel.playersTeamA.length,
+                      itemCount: viewModel.playersTeamB.length,
                       itemBuilder: (Context, index) {
-                        final player = viewModel.playersTeamA[index];
+                        final player = viewModel.playersTeamB[index];
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
                               trailing: IconButton(
                                 onPressed: () {
-                                  viewModel.remouvePlayer(index);
+                                  viewModel.remouvePlayer(index, 'B');
                                 },
                                 icon: Icon(Icons.close),
                               ),
