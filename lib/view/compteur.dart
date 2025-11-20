@@ -1,6 +1,7 @@
 import 'package:compteur/viewModel/compteurViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:compteur/view/navigation.dart';
 
 class Compteur extends StatefulWidget {
   Compteur({super.key});
@@ -56,12 +57,12 @@ class _CompteurState extends State<Compteur> {
       body: Column(
         children: [
           Container(
-            height: 520,
+            height: 510,
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-                    height: 520,
+                    height: 510,
                     child: Column(
                       children: [
                         SizedBox(height: 10),
@@ -218,7 +219,7 @@ class _CompteurState extends State<Compteur> {
             ),
           ),
           Container(
-            height: 150,
+            height: 100,
             child: Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -235,6 +236,7 @@ class _CompteurState extends State<Compteur> {
           ),
         ],
       ),
+      bottomNavigationBar: NavigationBarDubas(),
     );
   }
 }
