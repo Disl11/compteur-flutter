@@ -42,6 +42,13 @@ class _CompteurState extends State<Compteur> {
                   Navigator.pushNamed(context, '/TeamB');
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text("Mercato"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/Mercato');
+                },
+              ),
             ],
           ),
         ),

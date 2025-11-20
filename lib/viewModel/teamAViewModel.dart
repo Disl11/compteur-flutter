@@ -1,8 +1,10 @@
 import 'package:compteur/api/api.dart';
 import 'package:flutter/material.dart';
+import 'package:compteur/models/players.dart';
 
 class TeamAViewModel extends ChangeNotifier {
-  List playersTeamA = [];
+  List<Players> playersTeamA = [];
+  List<Players> mercato = [];
   bool isLoading = true;
 
   Future loadUserA() async {
@@ -21,7 +23,8 @@ class TeamAViewModel extends ChangeNotifier {
   }
 
   void remouvePlayerA(int index) {
-    playersTeamA.removeAt(index);
+    final player = playersTeamA.removeAt(index);
+    mercato.add(player);
     notifyListeners();
   }
 }
