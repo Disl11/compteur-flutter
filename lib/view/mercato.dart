@@ -36,6 +36,21 @@ class _MercatoState extends State<Mercato> {
                         return Card(
                           child: GestureDetector(
                             child: ListTile(
+                              trailing: PopupMenuButton(
+                                onSelected: (value) {
+                                  viewModel.transferPlayer(index, value);
+                                },
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: 'A',
+                                    child: Text("Transfer Equipe A"),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'B',
+                                    child: Text("Transfer Equipe B"),
+                                  ),
+                                ],
+                              ),
                               onTap: () {
                                 final playerId = player.id;
                                 Navigator.push(

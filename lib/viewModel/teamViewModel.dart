@@ -16,8 +16,20 @@ class TeamViewModel extends ChangeNotifier {
     // appel de l'api
     final players = await PlayersRepo.getPlayers();
     //condition
-    playersTeamA = players.take(10).toList();
-    playersTeamB = players.skip(10).take(10).toList();
+    playersTeamA.clear();
+    playersTeamB.clear();
+    mercato.clear();
+
+    for (int i = 0; i < players.length; ++i) {
+      if (i < 10) {
+        playersTeamA.add(players[i]);
+      } else if (i < 20) {
+        playersTeamB.add(players[i]);
+      } else {
+        mercato.add(players[i]);
+      }
+    }
+
     //indiquer chargement terminer
     isLoading = false;
     // avertir l'ui qu'elle peu affiché list des joueur
@@ -25,7 +37,7 @@ class TeamViewModel extends ChangeNotifier {
   }
 
   void remouvePlayer(int index, String team) {
-    late Players player;
+    final Players player;
 
     if (team == 'A') {
       player = playersTeamA.removeAt(index);
@@ -34,9 +46,22 @@ class TeamViewModel extends ChangeNotifier {
     } else {
       return;
     }
-    ;
 
     mercato.add(player);
+    notifyListeners();
+  }
+
+  void transferPlayer(int index, String team) {
+    final player = mercato.removeAt(index);
+
+    if (team == 'A') {
+      playersTeamA.add(player);
+    } else if (team == 'B') {
+      playersTeamB.add(player);
+    } else {
+      return;
+    }
+
     notifyListeners();
   }
 }
