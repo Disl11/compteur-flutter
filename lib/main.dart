@@ -1,5 +1,6 @@
 import 'package:compteur/view/compteur.dart';
 import 'package:compteur/view/mercato.dart';
+import 'package:compteur/view/navigation.dart';
 import 'package:compteur/view/teamA.dart';
 import 'package:compteur/view/teamB.dart';
 import 'package:compteur/view/profil.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         },
 
         title: 'Compteur',
-        home: Compteur(),
+        home: NavigationBottom(),
       ),
     );
   }
