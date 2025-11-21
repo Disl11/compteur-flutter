@@ -236,7 +236,6 @@ class _CompteurState extends State<Compteur> {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBarDubas(),
     );
   }
 }

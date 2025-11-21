@@ -27,7 +27,7 @@ class _MercatoState extends State<Mercato> {
               children: [
                 Center(
                   child: SizedBox(
-                    height: 672,
+                    height: 615,
                     width: 250,
                     child: ListView.builder(
                       itemCount: viewModel.mercato.length,
